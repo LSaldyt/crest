@@ -2,28 +2,55 @@ package optimal;
 
 import java.util.HashMap;
 
+
 public class Criteria
 {
-    private HashMap<String, Double> criteria;
+    private HashMap<String, Metric> criteria;
 
     public Criteria()
     {
         criteria = new HashMap<>();
     }
 
-    public void add(String key, Double weight)
+    public void add(String key, Metric metric)
     {
-        criteria.put(key, weight);
+        criteria.put(key, metric);
     }
 
-    public Double score(RankedItem item)
+    public void score(RankedItem item)
     {
         Double amount = 0.0;
         for (String key : criteria.keySet())
         {
-            Double weight = criteria.get(key);
-            amount += item.get(key) * weight;
+            Metric metric = criteria.get(key);
+            amount += metric.factor(item.get_normalized(key));
         }
-        return amount;
+        item.setScore(amount);
+    }
+
+    public void sort(RankedSet set)
+    {
+        for (String key : criteria.keySet())
+        {
+            double valMax = set.maxOf(key);
+
+            for (RankedItem item: set.items)
+            {
+                double val = item.get(key);
+                double valNormalized = val / valMax;
+                item.add_normalized(key, valNormalized);
+            }
+        }
+
+        for (RankedItem item : set.items)
+        {
+            score(item);
+        }
+        set.sort();
+    }
+
+    public String toString()
+    {
+        return "Criteria: " + criteria.toString();
     }
 }

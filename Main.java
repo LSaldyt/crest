@@ -26,10 +26,12 @@ public class Main
         rankedSet.add(corolla);
 
         Criteria criteria = new Criteria();
-        criteria.add("price", 10.);
-        criteria.add("efficiency", 1.);
-        criteria.add("mileage", 20.);
+        criteria.add("price", new Metric(1.0, false));
+        criteria.add("efficiency", new Metric(1.0, true));
+        criteria.add("mileage", new Metric(1.0, false));
 
-        System.out.println(rankedSet.by(criteria));
+        criteria.sort(rankedSet);
+        System.out.println(criteria);
+        System.out.println(rankedSet);
     }
 }
