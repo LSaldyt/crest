@@ -26,4 +26,9 @@ public class Metric
             return -1 * value;
         }
     }
+
+    public String toString()
+    {
+        return "Metric: " + weight + ", "  + maximizing;
+    }
 }

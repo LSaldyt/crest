@@ -4,15 +4,18 @@ import java.util.HashMap;
 
 public class RankedItem
 {
+    private String name;
     private HashMap<String, Double> attributes;
     private HashMap<String, Double> attributesNormalized;
 
     Double score;
 
-    public RankedItem()
+    public RankedItem(String name)
     {
+        this.name = name;
         attributes = new HashMap<>();
         attributesNormalized = new HashMap<>();
+        this.score = 0.0;
     }
 
     public void add(String key, Double value)
@@ -41,6 +44,6 @@ public class RankedItem
 
     public String toString()
     {
-        return "RankedItem: " + attributes.toString();
+        return name + ": " + attributes.toString();
     }
 }

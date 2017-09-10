@@ -45,5 +45,4 @@ public class RankedSet
         }
         return repr;
     }
-};
-
+}
