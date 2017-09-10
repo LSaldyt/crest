@@ -26,7 +26,7 @@ public class Main
         rankedSet.add(corolla);
 
         Criteria criteria = new Criteria();
-        criteria.add("price", new Metric(1.0, false));
+        criteria.add("price", new Metric(10.0, false));
         criteria.add("efficiency", new Metric(1.0, true));
         criteria.add("mileage", new Metric(1.0, false));
 

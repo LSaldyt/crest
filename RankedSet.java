@@ -32,7 +32,9 @@ public class RankedSet
     public void sort()
     {
         items.sort(Comparator.comparing(RankedItem::getScore));
+        Collections.reverse(items);
     }
+
 
     public String toString()
     {

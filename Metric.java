@@ -23,7 +23,7 @@ public class Metric
         }
         else
         {
-            return 1.0/value;
+            return -1 * value;
         }
     }
 }
