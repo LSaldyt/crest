@@ -6,6 +6,6 @@ public class Main
     {
         Optimizer optimizer = new Optimizer();
         optimizer.find_optimal("cars");
-        optimizer.find_optimal("cars", "price.csv");
+        optimizer.find_optimal("cars", "horsepower.csv");
     }
 }

@@ -20,13 +20,26 @@ public class RankedSet
 
     public Double maxOf(String key)
     {
+        Vector<Double> values = toValues(key);
+        return Collections.max(values);
+    }
+
+    public Double minOf(String key)
+    {
+        Vector<Double> values = toValues(key);
+        return Collections.min(values);
+    }
+
+    private Vector<Double> toValues(String key)
+    {
         Vector<Double> values = new Vector<>();
         values.add(0.); // Case for empty list
         for (RankedItem item : items)
         {
             values.add(item.get(key));
         }
-        return Collections.max(values);
+        //System.out.println(values);
+        return values;
     }
 
     public void sort()

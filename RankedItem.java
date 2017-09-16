@@ -25,8 +25,13 @@ public class RankedItem
 
     public Double get(String key)
     {
+        if (!attributes.containsKey(key))
+        {
+            System.err.println("criteria key: " + key + " not found in input data");
+        }
         return attributes.get(key);
     }
+
 
     public void add_normalized(String key, Double value){ attributesNormalized.put(key, value); }
 

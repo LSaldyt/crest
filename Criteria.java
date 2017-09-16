@@ -33,11 +33,12 @@ public class Criteria
         for (String key : criteria.keySet())
         {
             double valMax = set.maxOf(key);
+            double valMin = set.minOf(key);
 
             for (RankedItem item: set.items)
             {
                 double val = item.get(key);
-                double valNormalized = val / valMax;
+                double valNormalized = (val - valMin) / (valMax - valMin);
                 item.add_normalized(key, valNormalized);
             }
         }
