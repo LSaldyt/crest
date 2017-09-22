@@ -5,24 +5,28 @@ import java.util.HashMap;
 
 public class Criteria
 {
-    private HashMap<String, Metric> criteria;
+    private HashMap<String, Metric> metrics;
+    private HashMap<String, Filter> filters;
 
     public Criteria()
     {
-        criteria = new HashMap<>();
+        metrics = new HashMap<>();
+        filters = new HashMap<>();
     }
 
-    public void add(String key, Metric metric)
+    public void addMetric(String key, Metric metric)
     {
-        criteria.put(key, metric);
+        metrics.put(key, metric);
     }
+
+    public void addFilter(String key, Filter filter){ filters.put(key, filter); }
 
     public void score(RankedItem item)
     {
         Double amount = 0.0;
-        for (String key : criteria.keySet())
+        for (String key : metrics.keySet())
         {
-            Metric metric = criteria.get(key);
+            Metric metric = metrics.get(key);
             amount += metric.factor(item.get_normalized(key));
         }
         item.setScore(amount);
@@ -30,7 +34,7 @@ public class Criteria
 
     public void sort(RankedSet set)
     {
-        for (String key : criteria.keySet())
+        for (String key : metrics.keySet())
         {
             double valMax = set.maxOf(key);
             double valMin = set.minOf(key);
@@ -50,8 +54,31 @@ public class Criteria
         set.sort();
     }
 
+    public RankedSet filter(RankedSet set)
+    {
+        RankedSet filteredSet = new RankedSet();
+        for (RankedItem item : set.items)
+        {
+            boolean valid = true;
+            for (String key : filters.keySet())
+            {
+                Filter filter = filters.get(key);
+                if (!filter.filter(item.get(key)))
+                {
+                    valid = false;
+                    break;
+                }
+            }
+            if (valid)
+            {
+                filteredSet.add(item);
+            }
+        }
+        return filteredSet;
+    }
+
     public String toString()
     {
-        return "Criteria: " + criteria.toString();
+        return "Criteria: \n" + metrics.toString() + "\n" + filters.toString();
     }
 }

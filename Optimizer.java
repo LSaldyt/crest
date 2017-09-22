@@ -17,10 +17,12 @@ public class Optimizer
         Reader reader = new Reader();
         RankedSet rankedSet = reader.read_set("data/" + directory + "/items.csv");
         Criteria criteria = reader.read_criteria("data/" + directory + "/" + criteriaFile);
+        criteria.addFilter("MPG", new Filter("greater-equal", 20.));
 
+        rankedSet = criteria.filter(rankedSet);
         criteria.sort(rankedSet);
+
         System.out.println(criteria);
         System.out.println(rankedSet);
-
     }
 }

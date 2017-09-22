@@ -29,7 +29,7 @@ public class Reader
                 String name = cells.get(0);
                 double weight = Double.parseDouble(cells.get(1));
                 boolean maximizing = Boolean.parseBoolean(cells.get(2));
-                criteria.add(name, new Metric(weight, maximizing));
+                criteria.addMetric(name, new Metric(weight, maximizing));
             }
         }
         catch (IOException e)
