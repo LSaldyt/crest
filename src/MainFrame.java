@@ -17,19 +17,17 @@ public class MainFrame extends JFrame
 
     public MainFrame()
     {
-        setupLookAndFeel();
+        //setupLookAndFeel();
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(1, 2));
 
         JButton button1 = new JButton("Button1");
-        JButton button2 = new JButton("Button2");
 
         button1.addActionListener(new ButtonListener());
-        button2.addActionListener(new ButtonListener());
 
         panel.add(button1);
-        panel.add(button2);
+        panel.add(new CriteriaFrame());
 
         add(panel);
 
@@ -70,6 +68,5 @@ public class MainFrame extends JFrame
         {
             e.printStackTrace();
         }
-
     }
 }
