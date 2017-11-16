@@ -1,4 +1,4 @@
-package optimal;
+package src;
 
 public class Main
 {
@@ -6,6 +6,6 @@ public class Main
     {
         Optimizer optimizer = new Optimizer();
         optimizer.find_optimal("cars");
-        optimizer.find_optimal("cars", "horsepower.csv");
+        optimizer.find_optimal("cars", "mpg.csv");
     }
 }

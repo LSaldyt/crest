@@ -1,4 +1,4 @@
-package optimal;
+package src;
 
 public class Optimizer
 {

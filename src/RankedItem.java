@@ -1,4 +1,4 @@
-package optimal;
+package src;
 
 import java.util.HashMap;
 
