@@ -2,23 +2,29 @@ package src;
 
 public class Optimizer
 {
-    public Optimizer()
-    {
+    private RankedSet rankedSet;
+    private Criteria  criteria;
+    private Reader    reader;
 
+    public Optimizer(String directory, String filename, String criteriaFile)
+    {
+        reader = new Reader();
+        load(directory, filename);
+        load_criteria(directory, criteriaFile);
     }
 
-    public void find_optimal(String directory)
+    public void load(String directory, String filename)
     {
-        find_optimal(directory, "criteria.csv");
+        rankedSet = reader.read_set("data/" + directory + "/items.csv");
     }
 
-    public void find_optimal(String directory, String criteriaFile)
+    public void load_criteria(String directory, String filename)
     {
-        Reader reader = new Reader();
-        RankedSet rankedSet = reader.read_set("data/" + directory + "/items.csv");
-        Criteria criteria = reader.read_criteria("data/" + directory + "/" + criteriaFile);
-        criteria.addFilter("MPG", new Filter("greater-equal", 20.));
+        criteria = reader.read_criteria("data/" + directory + "/" + filename);
+    }
 
+    public void show()
+    {
         rankedSet = criteria.filter(rankedSet);
         criteria.sort(rankedSet);
 
