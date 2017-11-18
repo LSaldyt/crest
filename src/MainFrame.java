@@ -9,32 +9,32 @@ import java.awt.event.ActionListener;
 public class MainFrame extends JFrame
 {
     private Optimizer optimizer;
+    private JList<String> items;
 
     class ButtonListener implements ActionListener
     {
         public void actionPerformed(ActionEvent event)
         {
-            System.out.println("The button was pressed");
+            //optimizer.show();
         }
     }
 
     public MainFrame(Optimizer optimizer)
     {
-        //setupLookAndFeel();
+        setupLookAndFeel();
         this.optimizer = optimizer;
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(1, 3));
 
-        JButton button1 = new JButton("Button1");
-        JButton button2 = new JButton("Button1");
+        items = new JList<>();
+        JButton updateButton = new JButton("Update");
 
-        button1.addActionListener(new ButtonListener());
-        button2.addActionListener(new ButtonListener());
+        updateButton.addActionListener(new ButtonListener());
 
         panel.add(new CriteriaFrame(optimizer.getCriteria()));
-        panel.add(button1);
-        panel.add(button2);
+        panel.add(items);
+        panel.add(updateButton);
 
         add(panel);
 
@@ -46,31 +46,9 @@ public class MainFrame extends JFrame
 
     private void setupLookAndFeel()
     {
-        UIManager.put( "control", new Color( 128, 128, 128) );
-        UIManager.put( "info", new Color(128,128,128) );
-        UIManager.put( "nimbusBase", new Color( 18, 30, 49) );
-        UIManager.put( "nimbusAlertYellow", new Color( 248, 187, 0) );
-        UIManager.put( "nimbusDisabledText", new Color( 128, 128, 128) );
-        UIManager.put( "nimbusFocus", new Color(115,164,209) );
-        UIManager.put( "nimbusGreen", new Color(176,179,50) );
-        UIManager.put( "nimbusInfoBlue", new Color( 66, 139, 221) );
-        UIManager.put( "nimbusLightBackground", new Color( 18, 30, 49) );
-        UIManager.put( "nimbusOrange", new Color(191,98,4) );
-        UIManager.put( "nimbusRed", new Color(169,46,34) );
-        UIManager.put( "nimbusSelectedText", new Color( 255, 255, 255) );
-        UIManager.put( "nimbusSelectionBackground", new Color( 104, 93, 156) );
-        UIManager.put( "text", new Color( 230, 230, 230) );
         try
         {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
-            {
-                System.out.println(info.getName());
-                if ("Nimbus".equals(info.getName()))
-                {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         }
         catch (Exception e)
         {
