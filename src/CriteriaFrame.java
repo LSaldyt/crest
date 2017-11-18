@@ -4,17 +4,24 @@ import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.util.HashMap;
+import java.util.Set;
 
 public class CriteriaFrame extends JPanel
 {
-    public CriteriaFrame()
+    public CriteriaFrame(Criteria criteria)
     {
         setLayout(new GridLayout(1, 2));
         JPanel inner = new JPanel();
-        inner.setLayout(new GridLayout(20, 1));
-        for (int i = 0; i < 20; i++)
+
+        HashMap<String, Metric> metrics = criteria.getMetrics();
+        Set<String> keys = metrics.keySet();
+
+        inner.setLayout(new GridLayout(keys.size(), 1));
+        for (String key : keys)
         {
-            inner.add(new CriteriaEntry(String.valueOf(i)));
+            Metric metric = metrics.get(key);
+            inner.add(new CriteriaEntry(key, metric));
         }
 
         JScrollPane scrollPane = new JScrollPane(inner);

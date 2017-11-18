@@ -9,7 +9,7 @@ public class Main
         Optimizer optimizer = new Optimizer("cars", "items.csv", "criteria.csv");
         optimizer.show();
 
-        JFrame frame = new MainFrame();
+        JFrame frame = new MainFrame(optimizer);
         frame.setVisible(true);
     }
 }

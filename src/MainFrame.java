@@ -1,4 +1,5 @@
 package src;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,6 +8,8 @@ import java.awt.event.ActionListener;
 
 public class MainFrame extends JFrame
 {
+    private Optimizer optimizer;
+
     class ButtonListener implements ActionListener
     {
         public void actionPerformed(ActionEvent event)
@@ -15,19 +18,23 @@ public class MainFrame extends JFrame
         }
     }
 
-    public MainFrame()
+    public MainFrame(Optimizer optimizer)
     {
         //setupLookAndFeel();
+        this.optimizer = optimizer;
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(1, 2));
+        panel.setLayout(new GridLayout(1, 3));
 
         JButton button1 = new JButton("Button1");
+        JButton button2 = new JButton("Button1");
 
         button1.addActionListener(new ButtonListener());
+        button2.addActionListener(new ButtonListener());
 
+        panel.add(new CriteriaFrame(optimizer.getCriteria()));
         panel.add(button1);
-        panel.add(new CriteriaFrame());
+        panel.add(button2);
 
         add(panel);
 
@@ -57,6 +64,7 @@ public class MainFrame extends JFrame
         {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
             {
+                System.out.println(info.getName());
                 if ("Nimbus".equals(info.getName()))
                 {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());

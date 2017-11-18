@@ -13,6 +13,11 @@ public class Optimizer
         load_criteria(directory, criteriaFile);
     }
 
+    public Criteria getCriteria()
+    {
+        return criteria;
+    }
+
     public void load(String directory, String filename)
     {
         rankedSet = reader.read_set("data/" + directory + "/items.csv");

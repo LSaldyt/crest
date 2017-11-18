@@ -21,6 +21,11 @@ public class Criteria
 
     public void addFilter(String key, Filter filter){ filters.put(key, filter); }
 
+    public HashMap<String, Metric> getMetrics()
+    {
+        return metrics;
+    }
+
     public void score(RankedItem item)
     {
         Double amount = 0.0;
