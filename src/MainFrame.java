@@ -9,13 +9,21 @@ import java.awt.event.ActionListener;
 public class MainFrame extends JFrame
 {
     private Optimizer optimizer;
-    private JList<String> items;
+    private JTextArea output;
+    private CriteriaFrame criteriaFrame;
 
     class ButtonListener implements ActionListener
     {
         public void actionPerformed(ActionEvent event)
         {
-            //optimizer.show();
+            criteriaFrame.updateEntries();
+            optimizer.sort();
+            String outputText = "";
+            for (RankedItem item : optimizer.getRankedSet().items)
+            {
+                outputText += item.toString() + "\n";
+            }
+            output.setText(outputText);
         }
     }
 
@@ -24,24 +32,27 @@ public class MainFrame extends JFrame
         setupLookAndFeel();
         this.optimizer = optimizer;
 
+        output = new JTextArea();
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(1, 3));
 
-        items = new JList<>();
         JButton updateButton = new JButton("Update");
-
         updateButton.addActionListener(new ButtonListener());
 
-        panel.add(new CriteriaFrame(optimizer.getCriteria()));
-        panel.add(items);
+        criteriaFrame = new CriteriaFrame(optimizer.getCriteria());
+
+        panel.add(criteriaFrame);
+        panel.add(output);
         panel.add(updateButton);
 
         add(panel);
 
-        final int FRAME_WIDTH = 600;
-        final int FRAME_HEIGHT = 400;
+        final int FRAME_WIDTH = 1200;
+        final int FRAME_HEIGHT = 800;
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        updateButton.doClick();
     }
 
     private void setupLookAndFeel()

@@ -28,12 +28,15 @@ public class Optimizer
         criteria = reader.read_criteria("data/" + directory + "/" + filename);
     }
 
-    public void show()
+    public void sort()
     {
+        System.out.println(criteria.getMetrics());
         rankedSet = criteria.filter(rankedSet);
         criteria.sort(rankedSet);
+    }
 
-        System.out.println(criteria);
-        System.out.println(rankedSet);
+    public RankedSet getRankedSet()
+    {
+        return rankedSet;
     }
 }
