@@ -1,4 +1,11 @@
-name,price,mpg
-Prius,17000,50
-Yaris,3500,30
-FordF150,4000,19
+name,price,mpg,co2
+Tesla Model S,76500,101,229
+Ford C-MAX Hybrid SEL,27170,40,225
+Mercedes-Benz S550e,95650,26,227
+Kia Optima,21990,32,281
+Hyundai Sonata,21750,32,282
+Chevrolet Volt,24720,42,51
+Volkswagen e-Golf,28995,116,201
+Ford Focus Electric,29170,105,221
+Audi A3 e-tron Ultra,37900,41,138
+Toyota Prius c,19560,50,128

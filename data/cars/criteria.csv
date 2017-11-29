@@ -1,2 +1,4 @@
 name,value,maximizing
-mpg,20,true
+mpg,1,true
+price,1,false
+co2,0.5,false

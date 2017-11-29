@@ -21,7 +21,7 @@ public class MainFrame extends JFrame
             String outputText = "";
             for (RankedItem item : optimizer.getRankedSet().items)
             {
-                outputText += item.toString() + "\n";
+                outputText += item.toString() + "\n\n";
             }
             output.setText(outputText);
         }
